@@ -1,0 +1,16 @@
+node_modules
+.env
+*.env
+
+# Ignore all .env files
+.env
+*.env
+
+# Also explicitly ignore nested ones if needed
+backend/.env
+frontend/.env
+
+# Ignore node_modules
+node_modules/
+backend/node_modules/
+frontend/node_modules/
