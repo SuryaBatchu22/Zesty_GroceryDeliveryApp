@@ -69,6 +69,8 @@ import vanilla_muffins_image from "./vanilla_muffins_image.png";
 import quinoa_image from "./quinoa_image.png";
 import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
+import placeholder_image from './placeholder_image.png';
+import logo_zesty from './logo_zesty-cropped.svg';
 
 export const assets = {
   logo,
@@ -98,6 +100,8 @@ export const assets = {
   bottom_banner_image_sm,
   add_address_iamge,
   box_icon,
+  placeholder_image,
+  logo_zesty
 };
 
 export const categories = [
@@ -149,30 +153,27 @@ export const footerLinks = [
   {
     title: "Quick Links",
     links: [
-      { text: "Home", url: "#" },
-      { text: "Best Sellers", url: "#" },
-      { text: "Offers & Deals", url: "#" },
-      { text: "Contact Us", url: "#" },
-      { text: "FAQs", url: "#" },
+      { text: "Home", url: "/" },
+      { text: "Best Sellers", url: "/#bestsellers" },
+      { text: "Top Discounts", url: "/#topDiscounts" },
+      { text: "Contact Us", url: "/contact" },
     ],
   },
   {
     title: "Need help?",
     links: [
-      { text: "Delivery Information", url: "#" },
-      { text: "Return & Refund Policy", url: "#" },
-      { text: "Payment Methods", url: "#" },
-      { text: "Track your Order", url: "#" },
-      { text: "Contact Us", url: "#" },
+      { text: "Return & Refund Policy", url: "/return-refund-policy" },
+      { text: "Track your Order", url: "my-orders" },
+      { text: "FAQs", url: "/faq" },
     ],
   },
   {
     title: "Follow Us",
     links: [
-      { text: "Instagram", url: "#" },
-      { text: "Twitter", url: "#" },
-      { text: "Facebook", url: "#" },
-      { text: "YouTube", url: "#" },
+      { text: "Instagram", url: "/" },
+      { text: "Twitter", url: "/" },
+      { text: "Facebook", url: "/" },
+      { text: "YouTube", url: "/" },
     ],
   },
 ];

@@ -1,17 +1,17 @@
 import { assets, footerLinks } from "../assets/assets";
 
 const Footer = () => {
-      
+
     return (
         <div className="px-6 md:px-16 lg:px-24 xl:px-32 mt-24 bg-primary/10">
             <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-500/30 text-gray-500">
                 <div>
-                    <div className="flex items-center">
-                        <img className="w-26 md:w-24" src='./vite.svg' alt="dummyLogoColored" />
-                        <h1 className="text-6xl">Zesty</h1>
-                        
+                    <div className='flex items-center text-black'>
+                        <div className="text-2xl md:text-4xl lg:text-5xl">Zesty</div>
+                        <img className="w-8 md:w-12 lg:w-14" src={assets.logo_zesty} alt="logo" />{" "}
+
                     </div>
-                    
+
                     <p className="max-w-[410px] mt-6">We deliver fresh groceries and snacks straight to your door. Trusted by thousands, we aim to make your shopping experience simple and affordable.</p>
                 </div>
                 <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-5">
@@ -30,7 +30,7 @@ const Footer = () => {
                 </div>
             </div>
             <p className="py-4 text-center text-sm md:text-base text-gray-500/80">
-                Copyright {new Date().getFullYear} © Zesty All Right Reserved.
+                Copyright {new Date().getFullYear()} © Zesty All Right Reserved.
             </p>
         </div>
     );

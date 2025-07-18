@@ -36,8 +36,10 @@ const Navbar = () => {
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
 
             <NavLink to = '/' onClick={()=>setOpen(false)}>
-            <div className='flex items-center'>
-                <img className="h-9" src="../vite.svg" alt="logo" />Zesty
+               <div className='flex items-center text-black'>
+                <div className="text-2xl md:text-4xl lg:text-5xl">Zesty</div>
+                <img className="w-8 md:w-12 lg:w-14" src={assets.logo_zesty} alt="logo" />{" "}
+                
                 </div>
             </NavLink>
 

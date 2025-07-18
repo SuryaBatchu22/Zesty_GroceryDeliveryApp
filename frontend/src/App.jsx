@@ -18,6 +18,9 @@ import AddProduct from './pages/seller/AddProduct';
 import ProductList from './pages/seller/ProductList';
 import Orders from './pages/seller/Orders';
 import Loading from './components/Loading';
+import Contact from './pages/Contact';
+import ReturnRefund from './pages/ReturnRefund';
+import Faq from './pages/FAQ';
 
 const App = () => {
 
@@ -37,6 +40,9 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/products' element={<AllProducts/>} />
+          <Route path='/contact' element={<Contact/>} />
+          <Route path='/return-refund-policy' element={<ReturnRefund/>} />
+          <Route path='/faq' element={<Faq/>} />
           <Route path='/products/:category' element={<ProductCategory/>} />
           <Route path='/products/:category/:id' element={<ProductDetails/>} />
           <Route path='/cart' element={<Cart/>} />
