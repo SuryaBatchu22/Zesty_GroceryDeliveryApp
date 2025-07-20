@@ -131,7 +131,7 @@ const ProductDetails = () => {
                                 <p className="text-3xl font-medium">Related Products</p>
                                 <div className="w-20 h-0.5 bg-primary rounded-full mt-2"></div>
                             </div>
-                            <div className="grid grid-cols-[repeat(auto-fit,_minmax(220px,220px))] gap-3 md:gap-6 mt-6 justify-items-center w-full">
+                            <div className="grid grid-cols-[repeat(auto-fit,_minmax(220px,220px))] gap-3 md:gap-6 mt-6 justify-items-center w-full  justify-center md:justify-evenly">
                                 {relatedProducts.map(
                                     (product, index) => (
                                         <ProductCard key={index} product={product} />

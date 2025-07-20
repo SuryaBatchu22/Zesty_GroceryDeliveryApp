@@ -23,7 +23,7 @@ const AllProducts = () => {
             <div className='w-16 h-0.5 bg-primary rounded full'></div>
         </div>
         
-        <div className='grid grid-cols-[repeat(auto-fit,_minmax(220px,220px))] gap-3 md:gap-6 mt-6 justify-items-center'>
+        <div className='grid grid-cols-[repeat(auto-fit,_minmax(220px,220px))] gap-3 md:gap-6 mt-6 justify-items-center justify-center md:justify-evenly'>
            {filteredProducts.length > 0 ? 
            filteredProducts.filter((product)=>product.inStock).map((product,index)=>(
             <ProductCard key={index} product={product} />
