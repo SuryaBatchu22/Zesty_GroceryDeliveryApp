@@ -21,18 +21,21 @@ import Loading from './components/Loading';
 import Contact from './pages/Contact';
 import ReturnRefund from './pages/ReturnRefund';
 import Faq from './pages/FAQ';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 const App = () => {
 
   const isSellerPath = useLocation().pathname.includes('seller');
 
-  const {showUserLogin, isSeller} = useAppContext();
+  const {showUserLogin, showPassReset ,isSeller} = useAppContext();
 
   return (
     <div className='text-default min-h-screen text-gray-700 bg-white'>
       {isSellerPath ? null : <Navbar/>}
 
       {showUserLogin ? <Login/> : null}
+      {showPassReset ? <ForgotPassword/> : null}
 
       <Toaster />
 
@@ -49,11 +52,13 @@ const App = () => {
           <Route path='/add-address' element={<AddAddress/>} />
           <Route path='/my-orders' element={<MyOrders/>} />
           <Route path='/loader' element={<Loading/>} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin/>}>
               <Route index element={isSeller ? <AddProduct/> : null} />
               <Route path='product-list' element={<ProductList/>}/>
               <Route path='orders' element={<Orders/>}/>
           </Route>
+          <Route path='/forgot-password' element={<ForgotPassword/>}/>
         </Routes>
       </div>
       {!isSellerPath && <Footer/>}
