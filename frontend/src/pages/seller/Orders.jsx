@@ -21,6 +21,19 @@ const Orders = () => {
         }
     }
 
+    const statusHandler = async(event,orderId)=>{
+        try {
+            const {data} = await axios.post('/api/order/status', {orderId,status:event.target.value} )
+            if(data.success){
+                await fetchOrders()
+                toast.success(data.message)
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
+
     useEffect(()=>{
         fetchOrders();
     },[])
@@ -52,12 +65,24 @@ const Orders = () => {
                         <p>{order.address.phone}</p>
                     </div>
 
-                    <p className="font-medium text-lg my-auto">{currency}{order.amount}</p>
+                    
 
                     <div className="flex flex-col text-sm md:text-base tet-black/60">
+                        <p className="font-medium">Amount:{currency}{order.amount}</p>
                         <p>Method: {order.paymentType}</p>
                         <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
                         <p>Payment: {order.isPaid ? "Paid" : "Pending"}</p>
+                    </div>
+                    <div>
+                        <select onChange={(e)=>statusHandler(e,order._id)} value={order.status} className='border border-gray-600'>
+                            <option value="Order Placed">Order Placed</option>
+                            <option value="Packing">Packing</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Out for delivery">Out For Delivery</option>
+                            <option value="Delivered">Delivered</option>
+
+                        </select>
+
                     </div>
                 </div>
             ))}

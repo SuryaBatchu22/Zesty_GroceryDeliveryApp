@@ -50,12 +50,12 @@ const MyOrders = () => {
                                 </div>
                             </div>
                             <div  className='flex flex-col justify-center md:ml-8 mb-4 md:mb-0 '>
-                                <p>Quantity: {item.quantity || "1"}</p>
-                                <p>Status: {item.status}</p>
+                                <p>Quantity: {item.quantity || "1"}</p>   
                                 <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+                                <p>Status:<span  className='text-primary'> {order.status}</span></p>
                             </div>
-                            <p className='text-primary text-lg font-medium'>
-                                Amount: {currency}{item.product.offerPrice*item.quantity}
+                            <p className='text-lg font-medium'>
+                                Amount: <span className='text-primary'>{currency}{item.product.offerPrice*item.quantity}</span>
                             </p>
 
                         </div>
