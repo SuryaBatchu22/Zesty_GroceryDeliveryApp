@@ -184,3 +184,62 @@ export const resetPassword = async (req, res) => {
         res.status(400).json({ success: false, message: "Invalid or expired reset link." });
     }
 }
+
+//update password: /api/user/update-password/
+export const updatePassword = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const {currentPassword, newPassword } = req.body;
+
+        if (!currentPassword || !newPassword) {
+            return res.json({ success: false, message: "current and new passwords are required" })
+        };
+        
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.json({ success: false, message: "User not found" })
+        }
+
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+
+        if (!isMatch) {
+            return res.json({ success: false, message: "Invalid current password" })
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        await user.save();
+        
+        res.status(200).json({ success: true, message: "Password has been updated." });
+
+    } catch (error) {
+        console.error("Update password error:", error);
+        res.status(400).json({ success: false, message: "Unable to change password, please try again later" });
+    }
+}
+
+//update-name: /api/user/update-name
+export const updateName = async(req,res)=>{
+    try {
+        const userId = req.user.id;
+        const {newName } = req.body;
+
+        if (!newName) {
+            return res.json({ success: false, message: "New name is required" })
+        };
+
+        const user = await User.findByIdAndUpdate(userId, {name:newName});
+
+        if (!user) {
+            return res.json({ success: false, message: "User not found" })
+        }
+
+        res.status(200).json({ success: true, message: "Name has been updated successfully." });
+
+    } catch (error) {
+        console.error("Update name error:", error);
+        res.status(400).json({ success: false, message: "Unable to update your name, please try again later" });
+        
+    }
+}

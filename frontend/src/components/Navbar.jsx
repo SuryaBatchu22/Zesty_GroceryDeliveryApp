@@ -80,6 +80,7 @@ const Navbar = () => {
                         <ul className='hidden group-hover:block absolute top-10 right-0 bg-white shadow 
                         border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40'>
                             <li onClick={() => { navigate("/my-orders") }} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>My Orders</li>
+                            <li onClick={() => { navigate("/edit-profile") }} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>Edit Profile</li>
                             <li onClick={logout} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>logout</li>
                         </ul>
                     </div>
@@ -102,13 +103,14 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {open &&
-                <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
-                    <NavLink to='/' onClick={() => setOpen(false)}>Home</NavLink>
-                    <NavLink to='/products' onClick={() => setOpen(false)}>All Products</NavLink>
+                <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start px-5 text-sm md:hidden z-100`}>
+                    <NavLink to='/' onClick={() => setOpen(false)} className=" border-gray-400 border-b w-full pb-1">Home</NavLink>
+                    <NavLink to='/products' onClick={() => setOpen(false)} className=" border-gray-400 border-b w-full py-1">All Products</NavLink>
                     {user &&
-                        <NavLink to='/my-orders' onClick={() => setOpen(false)}>My Orders</NavLink>}
-                    <NavLink to='/contact' onClick={() => setOpen(false)}>Contact</NavLink>
-
+                    <NavLink to='/my-orders' onClick={() => setOpen(false)} className=" border-gray-400 border-b w-full py-1">My Orders</NavLink>}
+                    <NavLink to='/contact' onClick={() => setOpen(false)} className=" border-gray-400 border-b w-full py-1">Contact</NavLink>
+                    <NavLink to='/edit-profile' onClick={() => setOpen(false)} className=" border-gray-400 border-b w-full py-1">Edit Profile</NavLink>
+ 
                     {!user ? (
                         <button onClick={() => {
                             setOpen(false);

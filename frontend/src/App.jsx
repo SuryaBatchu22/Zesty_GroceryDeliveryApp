@@ -23,6 +23,7 @@ import ReturnRefund from './pages/ReturnRefund';
 import Faq from './pages/FAQ';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import EditProfile from './pages/EditProfile';
 
 const App = () => {
 
@@ -53,6 +54,7 @@ const App = () => {
           <Route path='/my-orders' element={<MyOrders/>} />
           <Route path='/loader' element={<Loading/>} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
           <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin/>}>
               <Route index element={isSeller ? <AddProduct/> : null} />
               <Route path='product-list' element={<ProductList/>}/>
