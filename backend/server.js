@@ -13,12 +13,22 @@ import orderRouter from './routes/orderRoute.js';
 import { stripeWebhooks } from './controllers/orderController.js';
 import newsletterRouter from './routes/newsletterRoute.js';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
 const app = express();
 const port = process.env.PORT || 4000 ; 
 
-app.get('/favicon.ico', (req, res) => res.status(204)); // No Content
-app.use(express.static('public'));
+// Resolve __dirname (for ES modules)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
+// Optional fallback in case favicon.ico is still not served
+//app.get('/favicon.ico', (req, res) => res.status(204).end());
+
+// Serve static files from /public
+app.use(express.static(path.join(__dirname, 'public')));
 
 await connectDB();          //db connection
 await connectCloudinary();  //cloudinary connection
