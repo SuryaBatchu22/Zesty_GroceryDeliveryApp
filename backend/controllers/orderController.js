@@ -102,6 +102,8 @@ export const placeOrderStripe = async(req,res)=>{
             }
          })
 
+         console.log(session,'stripe')
+
         return  res.json({success:true,url:session.url})
     } catch (error) {
         console.log("stripe error:", error.message)
@@ -140,6 +142,8 @@ export const stripeWebhooks = async (req,res)=>{
             });
 
             const {orderId, userId} = session.data[0].metadata;
+            console.log(session,'kk')
+            console.log(orderId, userId)
 
             //mark payment as paid
             await Order.findByIdAndUpdate(orderId,{isPaid:true})
