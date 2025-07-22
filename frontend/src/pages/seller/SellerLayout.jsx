@@ -17,11 +17,11 @@ const SellerLayout = () => {
 
     const logout = async () => {
         try {
-            const {data} = await axios.get('/api/seller/logout');
-            if(data.success){
+            const { data } = await axios.get('/api/seller/logout');
+            if (data.success) {
                 toast.success(data.message);
                 navigate('/')
-            }else{
+            } else {
                 toast.error(data.message)
             }
         } catch (error) {
@@ -33,8 +33,10 @@ const SellerLayout = () => {
         <>
             <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white">
                 <Link to='/'>
-                    <div className='flex items-center w-20 md:w-28'>
-                        <img className="cursor-pointer " src={assets.logo_zesty} alt="logo" />Zesty
+                    <div className='flex items-center text-black'>
+                        <div className="text-2xl md:text-4xl lg:text-5xl">Zesty</div>
+                        <img className="w-8 md:w-12 lg:w-14" src={assets.logo_zesty} alt="logo" />{" "}
+
                     </div>
                 </Link>
                 <div className="flex items-center gap-5 text-gray-500">
@@ -46,8 +48,8 @@ const SellerLayout = () => {
 
                 <div className="md:w-64 w-16 border-r h-[95vh] text-base border-gray-300 pt-4 flex flex-col ">
                     {sidebarLinks.map((item) => (
-                        <NavLink to={item.path} key={item.name} end={item.path==='/seller'}
-                            className={(isActive)=>`flex items-center py-3 px-4 gap-3 
+                        <NavLink to={item.path} key={item.name} end={item.path === '/seller'}
+                            className={(isActive) => `flex items-center py-3 px-4 gap-3 
                             ${isActive ? "border-r-4 md:border-r-[6px] bg-primary/10 border-primary text-primary"
                                     : "hover:bg-gray-100/90 border-white text-gray-700"
                                 }`
@@ -58,7 +60,7 @@ const SellerLayout = () => {
                         </NavLink>
                     ))}
                 </div>
-                <Outlet/>
+                <Outlet />
             </div>
         </>
     );
