@@ -16,6 +16,7 @@ import newsletterRouter from './routes/newsletterRoute.js';
 const app = express();
 const port = process.env.PORT || 4000 ; 
 
+app.get('/favicon.ico', (req, res) => res.status(204)); // No Content
 app.use(express.static('public'));
 
 
@@ -36,7 +37,6 @@ app.use(cors({origin:allowedOrigins, credentials:true}));
 app.get('/' , (req,res)=>{ 
     res.status(200).json("hello")
 })
-app.get('/favicon.ico', (req, res) => res.status(204)); // No Content
 
 
 app.use('/api/user', userRouter) //user routes
