@@ -19,6 +19,7 @@ import { dirname } from 'path';
 
 const app = express();
 const port = process.env.PORT || 4000 ; 
+app.use(express.json());
 
 // Resolve __dirname (for ES modules)
 const __filename = fileURLToPath(import.meta.url);
@@ -39,7 +40,6 @@ const allowedOrigins =['http://localhost:5173','https://zesty-beta.vercel.app']
 app.post('/stripe',express.raw({type:'application/json'}), stripeWebhooks)
 
 //Middleware configuration
-app.use(express.json());
 app.use(cookieParser());
 app.use(cors({origin:allowedOrigins, credentials:true}));
 
