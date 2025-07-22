@@ -23,7 +23,7 @@ await connectDB();          //db connection
 await connectCloudinary();  //cloudinary connection
 
 //Allow multiple Origins
-const allowedOrigins =['http://localhost:5173']
+const allowedOrigins =['http://localhost:5173','https://zesty-beta.vercel.app']
 
 app.post('/stripe',express.raw({type:'application/json'}), stripeWebhooks)
 
@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(cors({origin:allowedOrigins, credentials:true}));
 
 
-app.get('/' , (req,res)=>{
+app.get('/' , (req,res)=>{ 
     res.status(200).json("hello")
 })
 app.get('/favicon.ico', (req, res) => res.status(204)); // No Content
