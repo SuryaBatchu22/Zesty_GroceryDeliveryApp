@@ -22,12 +22,13 @@ await connectCloudinary();  //cloudinary connection
 //Allow multiple Origins
 const allowedOrigins =['http://localhost:5173','https://zesty-beta.vercel.app']
 
-app.post('/stripe',express.raw({type:'application/json'}), stripeWebhooks)
+app.post('/stripe',express.raw({type:'application/json'}), stripeWebhooks);
 
 //Middleware configuration
+app.use(cors({origin:allowedOrigins, credentials:true}));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin:allowedOrigins, credentials:true}));
+
 
 
 app.get('/' , (req,res)=>{ 
