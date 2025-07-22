@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import NewsletterSubscriber from "../models/NewsLetterSubscriber.js";
+import NewsletterSubscriber from "../models/NewsletterSubscriber.js";
 
 // Gmail transporter setup (free)
 const transporter = nodemailer.createTransport({
