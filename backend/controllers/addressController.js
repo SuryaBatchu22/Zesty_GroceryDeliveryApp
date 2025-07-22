@@ -26,3 +26,21 @@ export const getAddress = async(req,res)=>{
         res.json({success:false, message:error.message})
     }
 }
+
+// Delete address: /api/address/delete
+export const deleteAddress = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const {addressId }= req.body;
+        const address = await Address.findOneAndDelete({ _id: addressId, userId });
+
+        if (!address) {
+            return res.status(404).json({ success: false, message: "Address not found or unauthorized" });
+        }
+
+        res.json({ success: true, message: "Address deleted successfully" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ success: false, message: "Failed to delete address" });
+    }
+};
