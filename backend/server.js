@@ -60,3 +60,8 @@ app.use('/api/newsletter', newsletterRouter)
 app.listen(port , ()=>{
     console.log(`Server is running on http://localhost:${port}`)
 })
+
+app.use((err, req, res, next) => {
+  console.error('Unhandled error at', req.path, ':', err.message);
+  res.status(500).json({ success: false, message: 'Internal server error' });
+});
