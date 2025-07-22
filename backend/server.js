@@ -13,24 +13,8 @@ import orderRouter from './routes/orderRoute.js';
 import { stripeWebhooks } from './controllers/orderController.js';
 import newsletterRouter from './routes/newsletterRoute.js';
 
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
 const app = express();
 const port = process.env.PORT || 4000 ; 
-app.use(express.json());
-app.use(cookieParser());
-
-// Resolve __dirname (for ES modules)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Optional fallback in case favicon.ico is still not served
-//app.get('/favicon.ico', (req, res) => res.status(204).end());
-
-// Serve static files from /public
-app.use(express.static(path.join(__dirname, 'public')));
 
 await connectDB();          //db connection
 await connectCloudinary();  //cloudinary connection
@@ -41,11 +25,13 @@ const allowedOrigins =['http://localhost:5173','https://zesty-beta.vercel.app']
 app.post('/stripe',express.raw({type:'application/json'}), stripeWebhooks)
 
 //Middleware configuration
+app.use(express.json());
+app.use(cookieParser());
 app.use(cors({origin:allowedOrigins, credentials:true}));
 
 
 app.get('/' , (req,res)=>{ 
-    res.status(200).json("hello")
+    res.status(200).json("BACKEND is working")
 })
 
 
@@ -60,8 +46,3 @@ app.use('/api/newsletter', newsletterRouter)
 app.listen(port , ()=>{
     console.log(`Server is running on http://localhost:${port}`)
 })
-
-app.use((err, req, res, next) => {
-  console.error('Unhandled error at', req.path, ':', err.message);
-  res.status(500).json({ success: false, message: 'Internal server error' });
-});
