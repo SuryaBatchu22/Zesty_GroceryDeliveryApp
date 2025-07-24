@@ -1,5 +1,6 @@
  import {v2 as cloudinary} from "cloudinary";
 import Product from "../models/Product.js";
+import Review from "../models/Review.js";
 
 //add product : /api/product/add
 export const addProduct = async(req,res) =>{
@@ -30,7 +31,7 @@ export const addProduct = async(req,res) =>{
 //Get product list : /api/product/list
 export const productList = async(req,res) =>{
     try {
-        const products = await Product.find({})
+        const products = await Product.find({}).populate("review")
         res.json({success:true, products})
     } catch (error) {
         console.log("Products List error:" ,error.message )

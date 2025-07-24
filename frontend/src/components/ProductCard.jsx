@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import StarRating from "./StarRating.jsx";
 
 const ProductCard = ({ product }) => {
     const { currency, addToCart, updateCartItem, removeFromCart, cartItems, navigate } = useAppContext();
@@ -11,6 +12,10 @@ const ProductCard = ({ product }) => {
         return Math.round(off); // Rounded off to nearest integer
     }
 
+    const totalRating = product.review.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = product.review.length > 0 ? totalRating / product.review.length : 0;
+    
+    console.log(product)
     return product && (
         <div onClick={() => {
             navigate(`/products/${product.category.toLowerCase()}/${product._id}`);
@@ -23,13 +28,8 @@ const ProductCard = ({ product }) => {
                 <p>{product.category}</p>
                 <p className="text-gray-700 font-medium text-lg truncate w-full">{product.name}</p>
                 <div className="flex items-center gap-0.5">
-                    {Array(5).fill('').map((_, i) => (
-
-                        <img src={i < 4 ? assets.star_icon : assets.star_dull_icon} alt=''
-                            className="md:w-3.5 w3" key={i} />
-
-                    ))}
-                    <p>(4)</p>
+                    <StarRating rating = {averageRating.toFixed(1)}/>
+                    <p className="text-semibold ml-2">{" "}{`(${averageRating.toFixed(1)})`}</p>
                 </div>
                 <div className="flex items-end justify-between mt-3">
                     {!product.offerPrice ? (

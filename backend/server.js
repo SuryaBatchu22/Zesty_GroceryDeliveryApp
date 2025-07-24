@@ -12,6 +12,7 @@ import addressRouter from './routes/addressRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import { stripeWebhooks } from './controllers/orderController.js';
 import newsletterRouter from './routes/newsletterRoute.js';
+import reviewRoute from './routes/reviewRoute.js';
 
 const app = express();
 const port = process.env.PORT || 4000 ; 
@@ -43,6 +44,7 @@ app.use('/api/cart', cartRouter)
 app.use('/api/address', addressRouter)
 app.use('/api/order', orderRouter)
 app.use('/api/newsletter', newsletterRouter)
+app.use('/api/review', reviewRoute)
 
 app.listen(port , ()=>{
     console.log(`Server is running on http://localhost:${port}`)

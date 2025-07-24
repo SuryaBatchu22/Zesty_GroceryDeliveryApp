@@ -54,7 +54,6 @@ const AddAddress = () => {
   }
 
   const deleteAddress = async ({addressId}) => {
-    console.log(addressId)
     try {
       const { data } = await axios.post('/api/address/delete',{addressId});
       if (data.success) {
