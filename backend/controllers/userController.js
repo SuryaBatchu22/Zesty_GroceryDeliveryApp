@@ -33,7 +33,7 @@ export const register = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000, //cookie exp time:7d
         })
 
-        return res.json({ success: true, user: { email: user.email, name: user.name }, message:"User registered successfully" })
+        return res.json({ success: true, user: { email: user.email, name: user.name, _id: user._id, cartItems:{} }, message:"User registered successfully" })
 
     } catch (error) {
         console.log("Register Error:", error.message);
@@ -72,7 +72,7 @@ export const login = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000,
         })
 
-        return res.json({ success: true, user: { email: user.email, name: user.name }, message:"User logged In" })
+        return res.json({ success: true, user: { email: user.email, name: user.name, _id: user._id , cartItems:user.cartItems }, message:"User logged In" })
 
     } catch (error) {
         console.log("Login Error:", error.message);

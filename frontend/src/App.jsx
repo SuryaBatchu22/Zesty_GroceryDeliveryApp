@@ -24,6 +24,7 @@ import Faq from './pages/FAQ';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import EditProfile from './pages/EditProfile';
+import ManageReviews from './pages/seller/ManageReviews';
 
 const App = () => {
 
@@ -59,6 +60,7 @@ const App = () => {
               <Route index element={isSeller ? <AddProduct/> : null} />
               <Route path='product-list' element={<ProductList/>}/>
               <Route path='orders' element={<Orders/>}/>
+              <Route path='manage-reviews' element={<ManageReviews/>}/>
           </Route>
           <Route path='/forgot-password' element={<ForgotPassword/>}/>
         </Routes>

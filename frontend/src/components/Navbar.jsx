@@ -8,7 +8,7 @@ const Navbar = () => {
 
     const [open, setOpen] = useState(false)
     const { navigate, user, setUser, showUserLogin, setShowUserLogin,
-        searchQuery, setSearchQuery, getCartCount, axios } = useAppContext();
+        searchQuery, setSearchQuery, getCartCount, axios,setCartItems } = useAppContext();
 
     const location = useLocation();
 
@@ -18,6 +18,7 @@ const Navbar = () => {
             if (data.success) {
                 toast.success(data.message)
                 setUser(null);
+                setCartItems({});
                 navigate('/');
             } else {
                 toast.error(data.message)
@@ -119,7 +120,7 @@ const Navbar = () => {
                             Login
                         </button>
                     ) : (
-                        <button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm">
+                        <button  onClick={()=>{logout(); setOpen(false)}} className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm">
                             Logout
                         </button>
                     )}

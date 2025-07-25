@@ -15,7 +15,6 @@ const ProductCard = ({ product }) => {
     const totalRating = product.review.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = product.review.length > 0 ? totalRating / product.review.length : 0;
     
-    console.log(product)
     return product && (
         <div onClick={() => {
             navigate(`/products/${product.category.toLowerCase()}/${product._id}`);
@@ -44,7 +43,7 @@ const ProductCard = ({ product }) => {
                     )}
 
                     <div onClick={(e) => { e.stopPropagation(); }} className="text-primary">
-                        {!cartItems[product._id] ? (
+                        {!cartItems[product?._id] ? (
                             <button className="flex items-center justify-center gap-1 bg-primary/10 border border-primary/40 md:w-[80px] w-[64px] h-[34px] rounded cursor-pointer "
                                 onClick={() => addToCart(product._id)} >
                                 <img src={assets.cart_icon} alt='alt_icon' />

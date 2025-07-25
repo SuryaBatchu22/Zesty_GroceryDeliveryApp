@@ -21,6 +21,8 @@ const ProductList = () => {
         }
     }
 
+    console.log(products)
+
     return (
         <div className="no-scrollbar flex-1 h-[95vh] overflow-y-scroll flex flex-col justify-between">
             <div className="w-full md:p-10 p-4">

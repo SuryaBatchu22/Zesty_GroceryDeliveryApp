@@ -48,6 +48,7 @@ export const AppContextProvider = ({children})=>{
             }
         }catch(error){
             setUser(null);
+            console.log(error)
         }
     } 
    
@@ -154,6 +155,7 @@ export const AppContextProvider = ({children})=>{
     const value  = {navigate , user, setUser , setIsSeller , isSeller,showUserLogin , setShowUserLogin,
         products , currency , addToCart, updateCartItem, removeFromCart, cartItems, setCartItems,
         searchQuery, setSearchQuery,getCartAmount, getCartCount, axios, fetchProducts,showPassReset , setShowPassReset,
+        fetchProducts
     }
      
      return <AppContext.Provider value={value}>

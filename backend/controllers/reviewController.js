@@ -31,3 +31,46 @@ export const getReviewsByProduct = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+// DELETE: /api/review/delete
+export const deleteReview = async (req, res) => {
+  try {
+    const { reviewId } = req.body;
+
+    if (!reviewId) {
+      return res.status(400).json({ success: false, message: "Review ID is required" });
+    }
+
+    await Review.findByIdAndDelete(reviewId);
+
+    res.json({ success: true, message: "Review deleted successfully" });
+  } catch (error) {
+    console.log("delete review error:", error.message);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+// DELETE by user : /api/review/delete/:reviewId
+export const deleteReviewByUser = async (req, res) => {
+  try {
+    const reviewId = req.params.reviewId;
+    const userId = req.user.id;
+
+    const review = await Review.findById(reviewId);
+
+    if (!review) {
+      return res.status(404).json({ success: false, message: "Review not found" });
+    }
+
+    // Optional: Only allow deleting own review
+    if (review.userId.toString() !== userId) {
+      return res.status(403).json({ success: false, message: "Not authorized" });
+    }
+
+    await Review.findByIdAndDelete(reviewId);
+    res.json({ success: true, message: "Review deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

@@ -38,6 +38,7 @@ const Orders = () => {
         fetchOrders();
     },[])
 
+
     return (
         <div className='no-scrollbar flex-1 h-[95vh] overflow-y-scroll'>
         <div className="md:p-10 p-4 space-y-4">
@@ -56,14 +57,16 @@ const Orders = () => {
                             ))}
                         </div>
                     </div>
-
-                    <div className="text-sm md:text-base text-black/60">
-                        <p className='text-black/80'>{order.address.firstName} {order.address.lastName}</p>
-                        <p>{order.address.street}, {order.address.city}</p>
-                        <p>{order.address.state}, {order.address.zipcode}, {order.address.country}</p>
+                     {order && 
+                     <div className="text-sm md:text-base text-black/60">
+                        <p className='text-black/80'>{order.address?.firstName} {order.address?.lastName}</p>
+                        <p>{order.address?.street}, {order.address?.city}</p>
+                        <p>{order.address?.state}, {order.address?.zipcode}, {order.address?.country}</p>
                         <p></p>
-                        <p>{order.address.phone}</p>
+                        <p>{order.address?.phone}</p>
                     </div>
+                     }
+                    
 
                     
 

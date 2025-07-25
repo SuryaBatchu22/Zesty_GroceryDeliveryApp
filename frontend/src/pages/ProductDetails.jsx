@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { Link, useParams } from "react-router-dom";
-import { assets } from "../assets/assets";
 import ProductCard from "../components/ProductCard";
 import toast from "react-hot-toast";
 import StarRating from "../components/StarRating";
+import {assets} from '../assets/assets.js';
+import {  FaTrashAlt  } from "react-icons/fa";
 
 const ProductDetails = () => {
 
-    const { products, navigate, currency, addToCart, cartItems, removeFromCart, axios, user } = useAppContext();
+    const { products, navigate, currency, addToCart, cartItems, removeFromCart, axios, user, fetchProducts } = useAppContext();
     const { id } = useParams();
 
     const [relatedProducts, setRelatedProducts] = useState([]);
@@ -17,6 +18,7 @@ const ProductDetails = () => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [visibleCount, setVisibleCount] = useState(3);
+    const [yourReviewsVisibleCount, setYourReviewsVisibleCount] = useState(3);
 
     const product = products.find((item) => item._id === id);
 
@@ -53,6 +55,7 @@ const ProductDetails = () => {
                 toast.success(data.message);
                 setRating(0);
                 setComment('');
+                fetchProducts();
                 getProductReviews(); // optional callback to refresh list
             } else {
                 toast.error(data.message);
@@ -61,6 +64,22 @@ const ProductDetails = () => {
             toast.error(error.message);
         }
     };
+
+    const handleDeleteReview = async (reviewId) => {
+        try {
+            const { data } = await axios.delete(`/api/review/delete/${reviewId}`);
+            if (data.success) {
+                toast.success(data.message);
+                fetchProducts();
+                getProductReviews(); // or call a function to reload the reviews
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || error.message);
+        }
+    };
+
 
     useEffect(() => {
         if (products.length > 0) {
@@ -75,9 +94,8 @@ const ProductDetails = () => {
 
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
-
-
-
+    const yourReviews = reviews.filter(r => r.userId._id === user?._id);
+ 
     return product && (
         <div className="mt-12">
             <p>
@@ -106,7 +124,7 @@ const ProductDetails = () => {
                     <h1 className="text-3xl font-medium">{product.name}</h1>
 
                     <div className="flex items-center gap-0.5 mt-1">
-                        <StarRating rating = {averageRating.toFixed(1)}/>
+                        <StarRating rating={averageRating.toFixed(1)} />
                         <p className="text-semibold ml-2">{" "}{`(${averageRating.toFixed(1)})`}</p>
                     </div>
 
@@ -162,10 +180,9 @@ const ProductDetails = () => {
             </div>
 
             <div className="flex flex-col md:flex-row mt-20 w-full ">
-
                 <div className="flex flex-col w-full mr-4">
                     <div className="flex flex-col items-center w-max mb-2">
-                        <p className="text-xl font-medium">Customer Reviews</p>
+                        <p className="text-xl font-medium">All Customer Reviews</p>
                         <div className="w-15 h-0.25 bg-primary rounded-full mt-0.5"></div>
                     </div>
                     {reviews.length > 0 ? (
@@ -181,8 +198,8 @@ const ProductDetails = () => {
                                         </div>
                                         <div className="flex justify-between items-start">
                                             <p className="text-sm text-gray-700 mr-2">{r.comment}</p>
-                                            <span className="flex items-center"><StarRating rating={r.rating}/>&nbsp;
-                                            <span>{`(${r.rating})`}</span></span>
+                                            <span className="flex items-center"><StarRating rating={r.rating} />&nbsp;
+                                                <span>{`(${r.rating})`}</span></span>
                                         </div>
 
                                     </div>
@@ -208,7 +225,7 @@ const ProductDetails = () => {
                             </div>
                         </>
                     ) : (
-                        <div className=" flex items-center justify-center h-[20vh] text-gray-500 italic">No reviews yet.</div>
+                        <div className=" flex items-center justify-center h-[20vh] text-gray-500 italic">You are the first one to review!</div>
                     )}
                 </div >
                 {user && (<div className="flex flex-col w-full md:w-2/3">
@@ -251,12 +268,63 @@ const ProductDetails = () => {
 
                     </div>
                 </div>)}
-
-
-
             </div>
 
+            <div className="flex flex-col md:flex-row mt-20 w-full ">
+                {yourReviews.length > 0 ?
+                    (
+                        <div className="flex flex-col justify-center w-full mr-4 items-center">
+                            <div className="flex flex-col items-center w-max mb-2">
+                                <p className="text-xl font-medium">Your Reviews</p>
+                                <div className="w-15 h-0.25 bg-primary rounded-full mt-0.5"></div>
+                            </div>
+                            {
+                                yourReviews.slice(0, yourReviewsVisibleCount).map((r) => (
+                                    <div key={r._id} className="bg-white w-full md:w-3/4 p-4 rounded-md shadow mb-4 flex">
+                                        <div className='w-full'>
+                                            <div className="flex justify-between items-center">
+                                                <h4 className="font-semibold">{r.userId.name}</h4>
+                                                <span className="text-xs text-gray-500">
+                                                    {new Date(r.createdAt).toLocaleDateString()}
+                                                </span>
+                                            </div>
+                                            <div className="flex justify-between items-start">
+                                                <p className="text-sm text-gray-700 mr-2">{r.comment}</p>
+                                                <span className="flex items-center"><StarRating rating={r.rating} />&nbsp;
+                                                    <span>{`(${r.rating})`}</span></span>
+                                            </div>
+                                        </div>
+                                        <div className=' w-auto ml-2 pl-2 flex items-center border-l border-gray-300'>
+                                            <button onClick={() => handleDeleteReview(r._id)} className="cursor-pointer">
+                                                < FaTrashAlt  className=" hover:text-red-700" />
+                                            </button>
+                                        </div>
 
+                                    </div>
+                                ))}
+                            <div className="flex gap-4 mt-2">
+                                {yourReviews.length > yourReviewsVisibleCount && (
+                                    <button
+                                        onClick={() => setYourReviewsVisibleCount(prev => prev + 3)}
+                                        className="text-primary hover:underline cursor-pointer"
+                                    >
+                                        Show more reviews
+                                    </button>
+                                )}
+
+                                {yourReviewsVisibleCount > 3 && (
+                                    <button
+                                        onClick={() => setYourReviewsVisibleCount(count => count - 3)}
+                                        className="text-primary hover:underline cursor-pointer"
+                                    >
+                                        Show less
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+
+                    ) : null}
+            </div>
 
             <div className="flex flex-col items-center mt-20">
                 {relatedProducts.length > 0 ?

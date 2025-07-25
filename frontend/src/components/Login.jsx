@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
 
-    const { setShowUserLogin, setUser, axios, navigate,showPassReset , setShowPassReset } = useAppContext();
+    const { setShowUserLogin, setUser,setCartItems, axios, navigate,showPassReset , setShowPassReset } = useAppContext();
 
     const [state, setState] = useState("login");
     const [name, setName] = useState("");
@@ -18,6 +18,7 @@ const Login = () => {
             if (data.success) {
                 navigate('/');
                 setUser(data.user);
+                setCartItems((data.user?.cartItems))
                 setShowUserLogin(false);
                 toast.success(data.message)
             } else {
