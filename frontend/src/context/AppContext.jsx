@@ -21,7 +21,7 @@ export const AppContextProvider = ({children})=>{
     const [products, setProducts] = useState([]);
 
     const [cartItems, setCartItems] = useState({});
-    const [searchQuery, setSearchQuery] = useState({});
+    const [searchQuery, setSearchQuery] = useState('');
 
     //fetch seller status
     const fetchSeller = async () =>{
