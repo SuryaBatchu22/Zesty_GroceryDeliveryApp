@@ -25,6 +25,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import EditProfile from './pages/EditProfile';
 import ManageReviews from './pages/seller/ManageReviews';
+import ChatbotWidget from './components/ChatbotWidget';
 
 const App = () => {
 
@@ -65,6 +66,9 @@ const App = () => {
           <Route path='/forgot-password' element={<ForgotPassword/>}/>
         </Routes>
       </div>
+      
+      <ChatbotWidget/>
+
       {!isSellerPath && <Footer/>}
       
     </div>

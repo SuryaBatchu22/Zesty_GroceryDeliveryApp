@@ -71,6 +71,7 @@ import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
 import placeholder_image from './placeholder_image.png';
 import logo_zesty from './logo_zesty-cropped.svg';
+import robot_icon from './robot.png';
 
 export const assets = {
   logo,
@@ -101,7 +102,8 @@ export const assets = {
   add_address_iamge,
   box_icon,
   placeholder_image,
-  logo_zesty
+  logo_zesty,
+  robot_icon
 };
 
 export const categories = [
