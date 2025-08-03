@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import Product from "../models/Product.js";
+import {embedProducts} from "../configs/rag/embedProducts.js";
 import Review from "../models/Review.js";
 
 //add product : /api/product/add
@@ -17,6 +18,9 @@ export const addProduct = async (req, res) => {
         )
 
         await Product.create({ ...productData, image: imagesUrl })
+        
+        // Trigger embedding after product save for rag
+        await embedProducts();
 
         res.json({ success: true, message: "Product Added" })
 
@@ -63,6 +67,8 @@ export const changeStock = async (req, res) => {
     try {
         const { id, inStock } = req.body;
         await Product.findByIdAndUpdate(id, { inStock })
+        // Trigger embedding after update for rag
+        await embedProducts();
         res.json({ success: true, message: 'Stock Updated' })
     } catch (error) {
         console.log("Stock Update error:", error.message)
