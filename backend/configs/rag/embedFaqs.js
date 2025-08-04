@@ -1,3 +1,5 @@
+/*run the command "node embedFaqs.js" whenever you update the faqs data file*/
+
 // configs/embedFaqs.js
 import { HNSWLib } from "@langchain/community/vectorstores/hnswlib";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
