@@ -72,6 +72,8 @@ import barley_image from "./barley_image.png";
 import placeholder_image from './placeholder_image.png';
 import logo_zesty from './logo_zesty-cropped.svg';
 import robot_icon from './robot.png';
+import banner_desktop from './banner_desktop.png';
+import banner_mobile from './banner_mobile.png'
 
 export const assets = {
   logo,
@@ -103,7 +105,9 @@ export const assets = {
   box_icon,
   placeholder_image,
   logo_zesty,
-  robot_icon
+  robot_icon,
+  banner_desktop,
+  banner_mobile
 };
 
 export const categories = [

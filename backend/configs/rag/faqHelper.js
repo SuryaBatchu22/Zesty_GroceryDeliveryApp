@@ -39,7 +39,7 @@ const model = new ChatGoogleGenerativeAI({
 
 // 3. Prompt template for RAG
 const prompt = PromptTemplate.fromTemplate(`
-You are a helpful and knowledgeable assistant for a grocery delivery app called Zesty.
+You are a helpful and knowledgeable assistant for a grocery selling app called Zesty.
 
 Use the context below to answer user questions about how the app works, delivery, returns, payments, and other policies.
 

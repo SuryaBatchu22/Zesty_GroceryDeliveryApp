@@ -37,7 +37,7 @@ const model = new ChatGoogleGenerativeAI({
 
 // 3. Prompt template for product Q&A
 const prompt = PromptTemplate.fromTemplate(`
-You are an intelligent assistant helping customers with grocery product questions on the Zesty delivery app.
+You are an intelligent assistant helping customers with grocery product questions on the Zesty a grocery selling app.
 
 Use ONLY the context provided to answer questions about product names, categories, descriptions, prices, offers, and availability.
 
